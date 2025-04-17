@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduWeb - The Best Program to Enroll for Exchange</title>
+  <meta name="description" content="This is an education HTML template made by codewithsadee">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- Custom CSS Link -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Preload images -->
+  <link rel="preload" as="image" href="./assets/images/hero-bg.svg">
+  <link rel="preload" as="image" href="./assets/images/hero-banner-1.jpg">
+  <link rel="preload" as="image" href="./assets/images/hero-banner-2.jpg">
+
+</head>
+
+<body id="top">
+
+  <!-- HEADER -->
+  <header class="header" data-header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="./assets/images/logo.svg" width="162" height="50" alt="EduWeb logo">
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <div class="wrapper">
+          <a href="#" class="logo">
+            <img src="./assets/images/logo.svg" width="162" height="50" alt="EduWeb logo">
+          </a>
+          <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+          <li class="navbar-item"><a href="index.html#home" class="navbar-link" data-nav-link>Home</a></li>
+          <li class="navbar-item"><a href="index.html#about" class="navbar-link" data-nav-link>About</a></li>
+          <li class="navbar-item"><a href="index.html#courses" class="navbar-link" data-nav-link>Courses</a></li>
+          <li class="navbar-item"><a href="index.html#blog" class="navbar-link" data-nav-link>Blog</a></li>
+          <li class="navbar-item"><a href="#footer" class="navbar-link" data-nav-link>Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="header-action-btn" aria-label="toggle search" title="Search">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+        </button>
+        <button class="header-action-btn" aria-label="cart" title="Cart">
+          <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
+          <span class="btn-badge">0</span>
+        </button>
+        <a href="#footer" class="btn has-before">
+          <span class="span">Contact Me</span>
+          <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
+        </a>
+        <button class="header-action-btn" aria-label="open menu" data-nav-toggler>
+          <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <article>
+      <!-- Courses Section -->
+      <section class="section course" id="courses" aria-label="course">
+        <div class="container">
+          <p class="section-subtitle">More Courses</p>
+          <h2 class="h2 section-title">Pick A Course To Get Started</h2>
+
+          <ul class="grid-list" id="course-list">
+            <!-- Dynamically loaded courses will appear here -->
+          </ul>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background-image: url('./assets/images/footer-bg.png')">
+    <div class="footer-top section">
+      <div class="container grid-list">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <img src="./assets/images/logo-light.svg" width="162" height="50" alt="EduWeb logo">
+          </a>
+          <p class="footer-brand-text">
+            Edudev offers a comprehensive range of e-learning resources designed to cater to all skill levels. Whether you're a beginner or an advanced learner, our courses are crafted to help you achieve your educational goals with ease.
+          </p>
+          <div class="wrapper">
+            <span class="span">Add:</span>
+            <address class="address">Sec-7 Gurugram India</address>
+          </div>
+          <div class="wrapper">
+            <span class="span">Call:</span>
+            <a href="tel:+011234567890" class="footer-link">+91 12324*****</a>
+          </div>
+          <div class="wrapper">
+            <span class="span">Email:</span>
+            <a href="mailto:info@eduweb.com" class="footer-link">info@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#top" class="back-top-btn" aria-label="back top top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a>
+
+  <!-- Firebase Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD2sT5FfYtn3kGoJL6CrqN_swpmzm3Gqk8",
+      authDomain: "e-learning-1-b7235.firebaseapp.com",
+      projectId: "e-learning-1-b7235",
+      storageBucket: "e-learning-1-b7235.appspot.com",
+      messagingSenderId: "152862640749",
+      appId: "1:152862640749:web:3d3547d72991015a97cd64",
+      measurementId: "G-XE5C72VHE4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const fetchCourses = async () => {
+      const q = query(collection(db, "courses"), orderBy("timestamp", "desc"));
+      const querySnapshot = await getDocs(q);
+      const courses = querySnapshot.docs.map(doc => doc.data());
+      
+      const courseList = document.getElementById("course-list");
+      courseList.innerHTML = courses.map(course => `
+        <li>
+          <div class="course-card">
+            <figure class="card-banner img-holder" style="--width: 370px; --height: 220px;">
+              <a href="${course.link}" target="_blank">
+                <img src="${course.imageUrl}" width="370" height="220" loading="lazy" alt="${course.title}" class="img-cover">
+              </a>
+            </figure>
+            <div class="card-content">
+              <span class="badge">${course.level}</span>
+              <h3 class="h3">
+                <a href="${course.link}" class="card-title">${course.title}</a>
+              </h3>
+              <p class="rating-text">(${course.rating})</p>
+              <data class="price" value="${course.price}">${course.priceLabel}</data>
+            </div>
+          </div>
+        </li>
+      `).join('');
+    };
+
+    fetchCourses();
+  </script>
+
+  <!-- Custom JS Link -->
+  <script src="./assets/js/script.js" defer></script>
+
+  <!-- Ionicon Link -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  
+
+
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/68014b1c62de04190de9d64e/1ip2gqqaj';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discussion Forum</title>
+
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD2sT5FfYtn3kGoJL6CrqN_swpmzm3Gqk8",
+      authDomain: "e-learning-1-b7235.firebaseapp.com",
+      projectId: "e-learning-1-b7235",
+      storageBucket: "e-learning-1-b7235.appspot.com",
+      messagingSenderId: "152862640749",
+      appId: "1:152862640749:web:3d3547d72991015a97cd64",
+      measurementId: "G-XE5C72VHE4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Function to load all questions from Firestore
+    const loadQuestions = async () => {
+      const questionsRef = collection(db, "discussion");
+      const q = query(questionsRef, orderBy("timestamp", "desc"));
+      const querySnapshot = await getDocs(q);
+      const questionList = document.getElementById("doubt-list");
+
+      questionList.innerHTML = ''; // Clear existing questions
+
+      querySnapshot.forEach(doc => {
+        const post = doc.data();
+        const postId = doc.id;
+        const postElement = document.createElement('div');
+        postElement.classList.add("post");
+
+        postElement.innerHTML = `
+          <h3>${post.title}</h3>
+          <p>${post.content}</p>
+          <small>Posted by ${post.author}</small>
+          <div class="answers" id="answers-${postId}">
+            <!-- Answers will appear here -->
+          </div>
+          
+        `;
+
+        // Load answers for this question
+        loadAnswers(postId);
+
+        questionList.appendChild(postElement);
+      });
+    };
+
+    // Function to load answers for a specific question
+    const loadAnswers = async (postId) => {
+      const answersRef = collection(db, "discussion", postId, "answers");
+      const q = query(answersRef, orderBy("timestamp", "asc"));
+      const querySnapshot = await getDocs(q);
+      const answersContainer = document.getElementById(`answers-${postId}`);
+
+      answersContainer.innerHTML = ''; // Clear existing answers
+
+      querySnapshot.forEach(doc => {
+        const answer = doc.data();
+        const answerElement = document.createElement('div');
+        answerElement.classList.add("answer");
+
+        answerElement.innerHTML = `
+          <p>${answer.content}</p>
+          <small>Answered by ${answer.author}</small>
+        `;
+
+        answersContainer.appendChild(answerElement);
+      });
+    };
+
+    // Function to post a new question
+    const postQuestion = async () => {
+      const titleInput = document.getElementById("question-title").value;
+      const contentInput = document.getElementById("question-content").value;
+      const authorInput = "Student A"; // You can replace this with actual user data
+
+      if (titleInput.trim() === "" || contentInput.trim() === "") {
+        alert("Please enter a title and content for your question!");
+        return;
+      }
+
+      try {
+        // Add a new question to Firestore
+        await addDoc(collection(db, "discussion"), {
+          title: titleInput,
+          content: contentInput,
+          author: authorInput,
+          timestamp: serverTimestamp(),
+        });
+
+        // Reload questions to show the new question
+        loadQuestions();
+
+        // Clear the input fields
+        document.getElementById("question-title").value = "";
+        document.getElementById("question-content").value = "";
+      } catch (error) {
+        console.error("Error posting question: ", error);
+        alert("There was an error posting your question. Please try again.");
+      }
+    };
+
+    // Function to post an answer to a question
+    const postAnswer = async (postId) => {
+      const answerInput = document.getElementById(`answer-input-${postId}`).value;
+
+      if (answerInput.trim() === "") {
+        alert("Please enter an answer!");
+        return;
+      }
+
+      try {
+        // Add the answer to Firestore under the specific post
+        await addDoc(collection(db, "discussion", postId, "answers"), {
+          content: answerInput,
+          author: "Student B", // Replace with the actual student's name
+          timestamp: serverTimestamp(),
+        });
+
+        // Reload the answers for this post
+        loadAnswers(postId);
+
+        // Clear the input field after posting the answer
+        document.getElementById(`answer-input-${postId}`).value = "";
+      } catch (error) {
+        console.error("Error posting answer: ", error);
+        alert("There was an error posting your answer. Please try again.");
+      }
+    };
+
+    // Load all questions when the page loads
+    window.onload = loadQuestions;
+
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Discussion Forum</h1>
+  </header>
+
+  <section id="discussion">
+    <!-- Post a Question -->
+    <div id="post-question">
+      <h3>Post a Question</h3>
+      <input type="text" id="question-title" placeholder="Enter your question title" required><br>
+      <textarea id="question-content" placeholder="Enter your question content" required rows="4"></textarea><br>
+      <button onclick="postQuestion()">Post Question and Answer</button>
+    </div>
+    <div id="question-form">
+      <input type="text" id="userName" placeholder="Enter Email address" /><br>
+      <textarea id="questionText" placeholder="Ask your question here..." rows="4" cols="50"></textarea><br>
+      <button id="postQuestionBtn">Post Question and Answer</button>
+    </div>
+
+
+    <!-- Display Doubts (Questions) -->
+    <div id="doubt-list">
+      <!-- Dynamically loaded questions will appear here -->
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <a href="index.html">Back to Home</a> |
+    <a href="more.html">Learn More</a>
+  </footer>
+
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/68014b1c62de04190de9d64e/1ip2gqqaj';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+
+
+
+</html>
