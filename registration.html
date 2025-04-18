@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Registration</title>
+  <style>
+    /* Reset some styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #3498db;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .course-list {
+      margin-bottom: 20px;
+    }
+
+    .course-list select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f4f4f4;
+      transition: border-color 0.3s ease;
+    }
+
+    .course-list select:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background-color: #f4f4f4;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #3498db;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #2980b9;
+    }
+
+    .btn:active {
+      background-color: #1e5e92;
+    }
+
+    .btn:focus {
+      outline: none;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 14px;
+      text-align: center;
+      color: #888;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Course Registration</h1>
+
+  <div class="container">
+    <h3>Available Courses</h3>
+
+    <!-- Course list dropdown -->
+    <div class="course-list">
+      <select id="courseSelect">
+        <option value="course1">Introduction to Programming</option>
+        <option value="course2">Data Structures and Algorithms</option>
+        <option value="course3">Computer Architecture</option>
+        <option value="course4">Operating Systems</option>
+        <option value="course5">Discrete Mathematics for Computer Science</option>
+        <option value="course6">Database Management Systems</option>
+        <option value="course7">Software Engineering</option>
+        <option value="course8">Computer Networks</option>
+        <option value="course9">Web Development</option>
+        <option value="course10">Artificial Intelligence</option>
+        <option value="course11">Machine Learning</option>
+        <option value="course12">Computer Graphics</option>
+        <option value="course13">Theory of Computation</option>
+        <option value="course14">Mobile App Development</option>
+        <option value="course15">Cybersecurity</option>
+      </select>
+    </div>
+
+    <div class="input-field">
+      <input type="text" id="studentName" placeholder="Enter your name" />
+    </div>
+    <div class="input-field">
+      <input type="email" id="studentEmail" placeholder="Enter your email" />
+    </div>
+
+    <button class="btn" id="registerBtn">Register</button>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 Course Registration | All Rights Reserved</p>
+  </div>
+
+  <script type="module" src="registration.js"></script>
+</body>
+</html>

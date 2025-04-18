@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "EWEB-MAIN",
+    "public": "Eweb-main",
     "ignore": [
       "firebase.json",
       "**/.*",
